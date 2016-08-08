@@ -29,6 +29,7 @@ CREATE TABLE pothole (
 	pothole_id serial NOT NULL,
 	location_id integer NOT NULL,
 	is_scheduled boolean NOT NULL DEFAULT FALSE,
+	does_not_exist boolean NOT NULL DEFAULT FALSE,
 	has_been_visited boolean NOT NULL DEFAULT FALSE,
 	is_duplicate boolean NOT NULL DEFAULT FALSE,
 	is_fixed boolean NOT NULL DEFAULT FALSE,
