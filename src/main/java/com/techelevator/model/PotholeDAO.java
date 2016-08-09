@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface PotholeDAO {
 	
-	public void savePothole(Pothole pothole);
+	public void savePothole();
 	public List<Pothole> getAllPotholes();
 	public Pothole getPotholeByID(int id);
 	public void updatePotholeStatus(int potholeId, String status);
@@ -13,4 +13,5 @@ public interface PotholeDAO {
 	public void updatePotholeInspectionDate(int potholeId, LocalDate date);
 	public void updatePotholeFixedDate(int potholeId, LocalDate date);
 	public void saveLocation(Location location);
+	public Pothole getLastPothole();
 }

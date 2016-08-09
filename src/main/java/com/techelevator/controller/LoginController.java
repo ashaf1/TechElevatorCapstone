@@ -50,7 +50,7 @@ public class LoginController {
 		return "redirect:/login";
 	}
 	
-	@RequestMapping(path="/", method=RequestMethod.GET)
+	@RequestMapping(path={"/","/home"}, method=RequestMethod.GET)
 	public String showHomePage(ModelMap model) {
 		return "home";
 	}

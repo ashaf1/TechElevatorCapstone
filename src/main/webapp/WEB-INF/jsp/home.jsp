@@ -2,6 +2,9 @@
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-<h1> HOME PAGE </h1>
+<h3>Welcome to Pothole Solutions!</h3>
+
+<c:url var="reportPotholeHref" value="/report" />
+<a href="${reportPotholeHref}">Report a Pothole</a>
 
 <c:import url="/WEB-INF/jsp/footer.jsp" />

@@ -2,9 +2,6 @@
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-<h2>Latest Private Messages</h2>
-<ol class="message-list">
-	
-</ol>
+<h1>DASHBOARD</h1>
 
 <c:import url="/WEB-INF/jsp/footer.jsp" />

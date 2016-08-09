@@ -23,7 +23,7 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	}
 	
 	@Override
-	public void savePothole(Pothole pothole) {
+	public void savePothole() {
 		String sqlSearchForLocationId = "SELECT MAX(location_id) AS last_location FROM location";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSearchForLocationId);
 		int locationId;
@@ -56,6 +56,19 @@ public class JDBCPotholeDAO implements PotholeDAO {
 		if(result.next()) {
 			pothole = getPotholeFromResults(result);
 		}							
+		return pothole;
+	}
+	
+	@Override
+	public Pothole getLastPothole() {
+		Pothole pothole = null;
+		String sqlSearchForPotholeId = "SELECT MAX(pothole_id) AS last_pothole FROM pothole";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSearchForPotholeId);
+		int potholeId;
+		if(result.next()) {
+			potholeId = result.getInt("last_pothole");
+			pothole = getPotholeByID(potholeId);
+		}
 		return pothole;
 	}
 

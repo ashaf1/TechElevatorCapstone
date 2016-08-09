@@ -10,7 +10,7 @@ public class Location {
 	private String comments;
 	
 	public Location() {
-		
+		this.comments = "N/A";
 	}
 	
 	public int getLocationId() {
