@@ -5,7 +5,7 @@ import org.bouncycastle.util.encoders.Base64;
 public class PasswordMigrationTool {
 
 	public static void main(String[] args) {
-		String password = "gary";
+		String password = "aaron";
 		PasswordHasher hasher = new PasswordHasher();
 		byte[] salt = hasher.generateRandomSalt();
 		String saltString = new String(Base64.encode(salt));
