@@ -31,7 +31,7 @@
 	<body>
 		<header>
 			<c:url var="homePageHref" value="/" />
-			<c:url var="imgSrc" value="/img/potholeLogo.png" />
+			<c:url var="imgSrc" value="/img/potholeLogo2.jpg" />
 			<a href="${homePageHref}"><img src="${imgSrc}" class="img-responsive logo" /></a>
 		</header>
 		<nav class="navbar navbar-default">

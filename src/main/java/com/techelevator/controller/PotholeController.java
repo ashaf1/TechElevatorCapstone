@@ -28,8 +28,10 @@ public class PotholeController {
 		return "login";
 	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
-	public String redirectHomePage(@RequestParam String userName, RequestParam String,
-									@RequestParam (required=false) String destination,
+	public String redirectHomePage(ModelMap model, 
+								   @RequestParam String userName, 
+								   @RequestParam String password,
+								   @RequestParam (required=false) String destination,
 									HttpSession session){
 		
 		return "login";
