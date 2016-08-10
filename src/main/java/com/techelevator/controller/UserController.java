@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,9 @@ import com.techelevator.model.Pothole;
 import com.techelevator.model.PotholeDAO;
 import com.techelevator.model.UserDAO;
 
+@Transactional
 @Controller
-@SessionAttributes("allPotholes")
+@SessionAttributes({"allPotholes", "pothole"})
 public class UserController {
 	
 	private UserDAO userDAO;
@@ -32,6 +34,12 @@ public class UserController {
 	@RequestMapping(path="/users/{userName}", method=RequestMethod.GET)
 	public String displayDashboard(ModelMap model, @PathVariable String userName) {
 		return "userDashboard";
+	}
+	
+	@RequestMapping(path="/users/{userName}/reports", method=RequestMethod.GET)
+	public String displayReportPage(ModelMap model, @PathVariable String userName) {
+		model.put("potholes", potholeDAO.getAllPotholes());
+		return "searchReports";
 	}
 	
 	@RequestMapping(path="/report", method=RequestMethod.GET)
@@ -52,7 +60,7 @@ public class UserController {
 		location.setCity(city);
 		location.setState(state);
 		location.setZip(zip);
-		if(comments != null) {
+		if(!comments.equals("")) {
 			location.setComments(comments);
 		}
 		potholeDAO.saveLocation(location);
@@ -60,7 +68,6 @@ public class UserController {
 		
 		Pothole pothole = potholeDAO.getLastPothole();
 		model.put("pothole", pothole);
-		model.put("allPotholes", potholeDAO.getAllPotholes());
 		return "redirect:/confirmation";
 	}
 	

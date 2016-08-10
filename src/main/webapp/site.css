@@ -24,17 +24,25 @@ header h1 {
 	margin-right : 1em;
 }
 
-.message .timeago {
-	margin-left : 1em;
-	font-style : italic;
-	color : #c0c0c0;
-	padding : 0 .3em 0 .3em;
-	border-left : 1px solid #c0c0c0;
-	border-right : 1px solid #c0c0c0;
+#potholeReport td, th {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+#potholeReport th {
+	background-color: #ff9f00;
+}
+
+#potholeId {
+	text-align: center;
 }
 
 footer {
-	text-align : center;
+	padding: 10px;
+}
+
+.footer {
+	margin-top: 10px;
 }
 
 .to {
@@ -46,6 +54,7 @@ footer {
 }
 
 #currentUser {
+	padding-right: 10px;
 	text-align : right;
 	font-weight : bold;
 }
