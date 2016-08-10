@@ -1,8 +1,11 @@
 package com.techelevator.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -75,5 +78,32 @@ public class UserController {
 	public String displayConfirmationPage(ModelMap model) {
 		return "confirmation";
 	}
-
+	@RequestMapping(path="/users/{userName}/updatePothole", method=RequestMethod.GET)
+	public String displayUpdatePotholePage(ModelMap model, @RequestParam int potholeId, @PathVariable String userName){
+		model.put("currentPothole", potholeDAO.getPotholeByID(potholeId));
+		return "updatePothole";
+	}
+	@RequestMapping(path="/users/{userName}/updatePothole", method=RequestMethod.POST)
+	public String redirectToSearchReports(@PathVariable String userName,
+										  @RequestParam int potholeId,
+										  @RequestParam (required=false) String priorityLevel, 
+										  @RequestParam (required=false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate inspectionDate,
+										  @RequestParam (required=false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate repairDate,
+										  @RequestParam String status){
+		if(priorityLevel.equals("") == false){
+			potholeDAO.updatePotholePriority(potholeId, priorityLevel);
+		}
+		if(inspectionDate != null){
+			potholeDAO.updatePotholeInspectionDate(potholeId, inspectionDate);
+		}
+		if(repairDate != null){
+			potholeDAO.updatePotholeFixedDate(potholeId, repairDate);
+		}
+		if(status.equals("NEW") == false){
+			potholeDAO.updatePotholeStatus(potholeId, status);
+		}
+		
+		
+		return "redirect:/users/"+userName+"/reports";
+	}
 }

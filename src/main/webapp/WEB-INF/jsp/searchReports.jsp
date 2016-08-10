@@ -20,7 +20,7 @@
 	</tr>
 	<c:forEach items="${potholes}" var="pothole">
 		<tr>
-			<c:url var="updatePotholeHref" value="/updatePothole">
+			<c:url var="updatePotholeHref" value="/users/${currentUser}/updatePothole">
 				<c:param name="potholeId">${pothole.potholeId}</c:param>
 			</c:url>
 			<td id="potholeId"><a href="${updatePotholeHref}">${pothole.potholeId}</a></td>

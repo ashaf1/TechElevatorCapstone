@@ -7,30 +7,27 @@
 <form action="updatePothole" method="POST">
 
 	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
-	<label for="streetAddress">Street Address: </label>
-	<input type="text" name="streetAddress" />
-	
-	<label for="city">City: </label>
-	<input type="text" name="city" />
-	
+	<input type="hidden" name="potholeId" value="${param.potholeId}"/>
 	<label for="priorityLevel">Priority Level: </label>
 	<select name="priorityLevel">
+		<option value="">Select A Priority Level</option>
 		<option value="low">Low</option>
 		<option value="medium">Medium</option>
 		<option value="high">High</option>
 	</select>
+	
+	<label for="inspectionDate">Inspection Date</label>
+	<input type="date" name="inspectionDate"/>
+	
+	<label for="repairDate">Repair Date</label>
+	<input type="date" name="repairDate"/>
 	<label for="status"></label>
-	<select for="status">
-		<option value="new">New</option>
-		<option value="inspectionScheduled">Inspection Scheduled</option>
-	</select>
-	
-	<label for="zip">Zip Code: </label>
-	<input type="text" name="zip" />
-	<br>
-	<label for="comments">Comments: </label>
-	<input type="text" name="comments" />
-	
+	<select name="status">
+		<option value="NEW">New</option>
+		<option value="Inspection Scheduled">Inspection Scheduled</option>
+		<option value="Repair_Scheduled">Repair Scheduled</option>
+		<option value="Repaired">Repaired</option>
+	</select>	
 	<input type="submit" value="Submit" />
 </form>
 
