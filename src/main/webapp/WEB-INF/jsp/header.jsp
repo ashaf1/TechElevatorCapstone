@@ -46,13 +46,15 @@
 						<li><a href="${viewReportsHref}">View Reports</a></li>
 						<c:url var="changePasswordHref" value="/users/${currentUser}/changePassword" />
 						<li><a href="${changePasswordHref}">Change Password</a></li>
+						<c:if test="${user.role == 'Administrator'}">
+							<c:url var="newUserHref" value="/users/new" />
+							<li><a href="${newUserHref}">Create New User</a></li>
+						</c:if>
 					</c:if>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<c:choose>
 						<c:when test="${empty currentUser}">
-							<c:url var="newUserHref" value="/users/new" />
-							<li><a href="${newUserHref}">Sign Up</a></li>
 							<c:url var="loginHref" value="/login" />
 							<li><a href="${loginHref}">Log In</a></li>
 						</c:when>
@@ -68,6 +70,6 @@
 			</div>
 		</nav>
 		<c:if test="${not empty currentUser}">
-			<p id="currentUser">Current User: ${currentUser}</p>
+			<p id="currentUser">Current User: ${user.userName}</p>
 		</c:if>		
 		<div class="container">

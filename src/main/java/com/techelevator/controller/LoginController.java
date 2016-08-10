@@ -17,7 +17,7 @@ import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
 @Controller
-@SessionAttributes("currentUser")
+@SessionAttributes({"currentUser", "user"})
 public class LoginController {
 	
 	private UserDAO userDAO;
@@ -67,7 +67,9 @@ public class LoginController {
 		
 		if(userDAO.searchForUsernameAndPassword(userName, password)) {
 			session.invalidate();
+			User user = userDAO.getUserByUsernameAndPassword(userName, password);
 			model.put("currentUser", userName);
+			model.put("user", user);
 			if(isValidRedirect(destination)) {
 				return "redirect:"+destination;
 			} else {

@@ -47,6 +47,30 @@ public class JDBCUserDAO implements UserDAO {
 			return false;
 		}
 	}
+	
+	@Override
+	public User getUserByUsernameAndPassword(String username, String password) {
+		User user = new User();
+		String sqlSearchForUser = "SELECT * "+
+			      "FROM user_table "+
+			      "WHERE UPPER(user_name) = ?";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForUser, username.toUpperCase());
+		if(results.next()) {
+			String storedSalt = results.getString("salt");
+			String storedPassword = results.getString("password");
+			String hashedPassword = passwordHasher.computeHash(password, Base64.decode(storedSalt));
+			if(storedPassword.equals(hashedPassword)) {
+				user.setUserId(results.getInt("user_id"));
+				user.setFirstName(results.getString("first_name"));
+				user.setLastName(results.getString("last_name"));
+				user.setUserName(results.getString("user_name"));
+				user.setPassword(results.getString("password"));
+				user.setRole(results.getString("role"));
+			}
+		}
+		return user;
+	}
 
 	@Override
 	public void updatePassword(String username, String password) {
@@ -55,5 +79,6 @@ public class JDBCUserDAO implements UserDAO {
 		String saltString = new String(Base64.encode(salt));
 		jdbcTemplate.update("UPDATE user_table SET password = ?, salt = ? WHERE user_name = ?", hashedPassword, saltString, username);
 	}
+
 
 }
