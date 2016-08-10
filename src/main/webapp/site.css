@@ -2,6 +2,10 @@ header h1 {
 	display : inline;
 }
 
+#reportLink {
+	font-size: 25px;
+}
+
 .content {
 	padding-left : 1em;
 }
@@ -33,7 +37,17 @@ header h1 {
 	background-color: #ff9f00;
 }
 
-#potholeId {
+#potholeId, .status, #priority {
+	text-align: center;
+}
+
+#myAccount p {
+	margin: 1px;
+}
+
+#new {
+	color: red;
+	font-weight: bold;
 	text-align: center;
 }
 

@@ -106,4 +106,16 @@ public class UserController {
 		
 		return "redirect:/users/"+userName+"/reports";
 	}
+	
+	@RequestMapping(path="/users/{userName}/changePassword", method=RequestMethod.GET)
+	public String displayChangePasswordForm(ModelMap model, @PathVariable String userName) {
+		model.put("userName", userName);
+		return "changePassword";
+	}
+	
+	@RequestMapping(path="/users/{userName}/changePassword", method=RequestMethod.POST)
+	public String changePassword(@PathVariable String userName, @RequestParam String password) {
+		userDAO.updatePassword(userName, password);
+		return "userDashboard";
+	}
 }

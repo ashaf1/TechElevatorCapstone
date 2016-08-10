@@ -2,7 +2,7 @@
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-<h3>Pothole Report</h3>
+<h2>Pothole Report</h2>
 
 <table id="potholeReport">
 	<tr>
@@ -13,7 +13,7 @@
 		<th>Zip</th>
 		<th>Comments</th>
 		<th>Submitted On</th>
-		<th>Status</th>
+		<th class="status">Status</th>
 		<th>Inspection Date</th>
 		<th>Fixed Date</th>
 		<th>Priority</th>
@@ -30,7 +30,14 @@
 			<td>${pothole.location.zip}</td>
 			<td>${pothole.location.comments}</td>
 			<td>${pothole.createDate}</td>
-			<td>${pothole.status}</td>
+			<c:choose>
+				<c:when test="${pothole.status == 'NEW'}">
+					<td id="new">${pothole.status}</td>
+				</c:when>
+				<c:otherwise>
+					<td class="status">${pothole.status}</td>
+				</c:otherwise>
+			</c:choose>
 			<c:choose>
 				<c:when test="${pothole.inspectionDate != null}">
 					<td>${pothole.inspectionDate}</td>
@@ -47,7 +54,7 @@
 					<td>Not yet scheduled</td>
 				</c:otherwise>
 			</c:choose>
-			<td>${pothole.priorityLevel}</td>
+			<td id="priority">${pothole.priorityLevel}</td>
 		</tr>
 	</c:forEach>
 </table>
