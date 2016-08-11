@@ -53,6 +53,7 @@
 		<th>Repair Date</th>
 		<th>Priority</th>
 	</tr>
+	<%-- <c:if test="${filteredPotholes.length == 0}"> --%>
 	<c:forEach items="${potholes}" var="pothole">
 		<tr>
 			<c:url var="updatePotholeHref" value="/users/${currentUser}/updatePothole">
@@ -91,6 +92,47 @@
 			<td id="priority">${pothole.priorityLevel}</td>
 		</tr>
 	</c:forEach>
+	<%-- </c:if> --%>
+	<%-- <c:if test = "${filteredPotholes.length != 0}">
+		<c:forEach items="${filteredPotholes}" var="pothole">
+		<tr>
+			<c:url var="updatePotholeHref" value="/users/${currentUser}/updatePothole">
+				<c:param name="potholeId">${pothole.potholeId}</c:param>
+			</c:url>
+			<td id="potholeId"><a href="${updatePotholeHref}">${pothole.potholeId}</a></td>
+			<td>${pothole.streetAddress}</td>
+			<td>${pothole.city}</td>
+			<td>${pothole.zip}</td>
+			<td>${pothole.comments}</td>
+			<td>${pothole.createDate}</td>
+			<c:choose>
+				<c:when test="${pothole.status == 'NEW'}">
+					<td id="new">${pothole.status}</td>
+				</c:when>
+				<c:otherwise>
+					<td class="status">${pothole.status}</td>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${pothole.inspectionDate != null}">
+					<td>${pothole.inspectionDate}</td>
+				</c:when>
+				<c:otherwise>
+					<td>Not yet scheduled</td>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${pothole.fixedDate != null}">
+					<td>${pothole.fixedDate}</td>
+				</c:when>
+				<c:otherwise>
+					<td>Not yet scheduled</td>
+				</c:otherwise>
+			</c:choose>
+			<td id="priority">${pothole.priorityLevel}</td>
+		</tr>
+	</c:forEach>
+	</c:if> --%>
 </table>
 
 <c:import url="/WEB-INF/jsp/footer.jsp" />

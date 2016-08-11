@@ -13,9 +13,6 @@ public interface PotholeDAO {
 	public void updatePotholeInspectionDate(int potholeId, LocalDate date);
 	public void updatePotholeFixedDate(int potholeId, LocalDate date);
 	public Pothole getLastPothole();
-	public List<Pothole> getPotholesByStatus();
-	public List<Pothole> getPotholesByPriorityLevel();
-	public List<Pothole> getPotholesByCity();
-	public List<Pothole> getPotholesByStreetAddress();
-	public List<Pothole> getPotholeByZip();
+	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String streetAddress, String zip);
+	
 }

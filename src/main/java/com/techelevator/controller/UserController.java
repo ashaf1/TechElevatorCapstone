@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.techelevator.model.Pothole;
 import com.techelevator.model.PotholeDAO;
@@ -39,8 +40,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/users/{userName}/reports", method=RequestMethod.GET)
-	public String displayReportPage(ModelMap model, @PathVariable String userName) {
+	public String displayReportPage(ModelMap model, @RequestParam (required = false) String status, 
+			  										@RequestParam (required = false) String priorityLevel,
+			  										@RequestParam (required = false) String city,
+			  										@RequestParam (required = false) String streetAddress,
+			  										@RequestParam (required = false) String zip,
+			  										@PathVariable String userName) {
 		model.put("potholes", potholeDAO.getAllPotholes());
+//		model.put("filteredPotholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
+		
 		return "searchReports";
 	}
 	@RequestMapping(path="/users/{userName}/reports", method = RequestMethod.POST)
@@ -48,7 +56,12 @@ public class UserController {
 											  @RequestParam (required = false) String priorityLevel,
 											  @RequestParam (required = false) String city,
 											  @RequestParam (required = false) String streetAddress,
-											  ModelMap model) {		
+											  @RequestParam (required = false) String zip,
+											  @PathVariable String userName,
+											  ModelMap model) {	
+		
+		
+		model.put("filteredPotholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
 		
 		return "redirect:/searchReports";
 	}

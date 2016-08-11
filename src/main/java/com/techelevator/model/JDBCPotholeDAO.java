@@ -129,35 +129,31 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	}
 
 	@Override
-	public List<Pothole> getPotholesByStatus() {
+	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String streetAddress, String zip) {
+		List<Pothole> potholes = new ArrayList<>();
+		String sqlGetFilteredPotholes = "SELECT * FROM pothole JOIN location ON pothole.location_id = location.location_id WHERE status = ? ";
+		if(priorityLevel != null){
+			sqlGetFilteredPotholes += "AND priority_level = ? ";
+		}
+		if(city != null){
+			sqlGetFilteredPotholes += "AND UPPER(city) = ? ";
+		}
+		if(streetAddress != null){
+			sqlGetFilteredPotholes += "AND UPPER(street_address) LIKE '%?%' ";
+		}
+		if(zip != null){
+			sqlGetFilteredPotholes += "AND zip = ?";
+		}
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetFilteredPotholes, status, priorityLevel, city, streetAddress, zip);
+		
+		while(results.next()){
+			Pothole p = getPotholeFromResults(results);
+			potholes.add(p);
+		}
+		return potholes;
+	}
+
 	
-		return null;
-	}
-
-	@Override
-	public List<Pothole> getPotholesByPriorityLevel() {
-
-		return null;
-	}
-
-	@Override
-	public List<Pothole> getPotholesByCity() {
-
-		return null;
-	}
-
-	@Override
-	public List<Pothole> getPotholesByStreetAddress() {
-		
-		return null;
-	}
-
-	@Override
-	public List<Pothole> getPotholeByZip() {
-		
-		return null;
-	}
-
 
 	
 }
