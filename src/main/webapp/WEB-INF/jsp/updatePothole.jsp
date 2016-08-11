@@ -29,19 +29,54 @@
 				</c:when>
 				<c:when test="${currentPothole.inspectionDate != null}">
 					<h5>Inspected on ${currentPothole.inspectionDate}.</h5>
-					
+					<c:choose>
+						<c:when test="${currentPothole.fixedDate != null && currentPothole.status != 'Repaired'}">
+							<h5>Repairs scheduled for ${currentPothole.fixedDate}</h5>
+						</c:when>
+						<c:when test="${currentPothole.fixedDate != null && currentPothole.status == 'Repaired'}">
+							<h5>Repaired on ${currentPothole.fixedDate}</h5>
+						</c:when>
+					</c:choose>
 					<div id ="priorityLevel" class="form-group">
 						<label for="priorityLevel">Priority Level: </label>
 						<select name="priorityLevel" class="form-control update">
 							<option value="">Select A Priority Level</option>
-							<option value="Low">Low</option>
-							<option value="Medium">Medium</option>
-							<option value="High">High</option>
+							<c:choose>
+								<c:when test="${currentPothole.priorityLevel == 'Low'}">
+									<option value="Low" selected="selected">Low</option>
+								</c:when>
+								<c:otherwise>
+									<option value="Low">Low</option>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${currentPothole.priorityLevel == 'Medium'}">
+									<option value="Medium" selected="selected">Medium</option>
+								</c:when>
+								<c:otherwise>
+									<option value="Medium">Medium</option>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${currentPothole.priorityLevel == 'High'}">
+									<option value="High" selected="selected">High</option>
+								</c:when>
+								<c:otherwise>
+									<option value="High">High</option>
+								</c:otherwise>
+							</c:choose>
 						</select>
 					</div>
 					<div id="repairDate" class="form-group">
 						<label for="repairDate">Repair Date: </label>
-						<input type="date" name="repairDate" class="form-control update"/>
+						<c:choose>
+							<c:when test="${currentPothole.fixedDate != null}">
+								<input type="date" name="repairDate" class="form-control update" value="${currentPothole.fixedDate}"/>
+							</c:when>
+							<c:otherwise>
+								<input type="date" name="repairDate" class="form-control update"/>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="form-group">
 					<label for="status">Status:</label>

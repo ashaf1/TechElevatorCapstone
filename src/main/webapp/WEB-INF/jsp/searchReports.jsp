@@ -7,6 +7,7 @@
 <h3> Search Potholes by Criteria: </h3>
 <div class = "form-group">
 	<form action= "searchReports" method = "POST"> 
+	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 		<div class ="searchCriteria">
 			<label for="status">Status:</label>
 				<select name="status"  class="form-control update">
