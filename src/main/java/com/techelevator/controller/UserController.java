@@ -58,18 +58,17 @@ public class UserController {
 									   @RequestParam String comments,
 									   ModelMap model
 										) {
-		Location location = new Location();
-		location.setStreetAddress(streetAddress);
-		location.setCity(city);
-		location.setState(state);
-		location.setZip(zip);
+		Pothole pothole = new Pothole();
+		pothole.setStreetAddress(streetAddress);
+		pothole.setCity(city);
+		pothole.setState(state);
+		pothole.setZip(zip);
 		if(!comments.equals("")) {
-			location.setComments(comments);
+			pothole.setComments(comments);
 		}
-		potholeDAO.saveLocation(location);
+		potholeDAO.saveLocation(pothole);
 		potholeDAO.savePothole();
 		
-		Pothole pothole = potholeDAO.getLastPothole();
 		model.put("pothole", pothole);
 		return "redirect:/confirmation";
 	}
