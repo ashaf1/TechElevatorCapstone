@@ -23,8 +23,12 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	}
 	
 	@Override
-	public void savePothole() {
-		String sqlSearchForLocationId = "SELECT MAX(location_id) AS last_location FROM location";
+	public void savePothole(Pothole pothole) {
+		
+		String sqlSaveLocation = "INSERT INTO location(street_address, city, zip, comments) VALUES(?, ?, ?, ?)";
+		jdbcTemplate.update(sqlSaveLocation, pothole.getStreetAddress(), pothole.getCity(), pothole.getZip(), pothole.getComments());
+		
+		String sqlSearchForLocationId = "SELECT lastval() AS last_location FROM location limit 1";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSearchForLocationId);
 		int locationId;
 		if(result.next()) {
@@ -32,12 +36,13 @@ public class JDBCPotholeDAO implements PotholeDAO {
 			jdbcTemplate.update("INSERT INTO pothole(location_id) VALUES(?)", locationId);
 		}
 		
+		
 	}
 
 	@Override
 	public List<Pothole> getAllPotholes() {
 		List<Pothole> allPotholes = new ArrayList<>();
-		String sqlSearchForPotholes = "SELECT * FROM pothole JOIN location ON pothole.location_id = location.location_id";
+		String sqlSearchForPotholes = "SELECT * FROM pothole JOIN location ON pothole.location_id = location.location_id Order By pothole.pothole_id ASC";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForPotholes);
 		while(results.next()) {
 			Pothole pothole = getPotholeFromResults(results);
@@ -70,12 +75,6 @@ public class JDBCPotholeDAO implements PotholeDAO {
 			pothole = getPotholeByID(potholeId);
 		}
 		return pothole;
-	}
-
-	@Override
-	public void saveLocation(Pothole pothole) {
-		String sqlSaveLocation = "INSERT INTO location(street_address, city, zip, comments) VALUES(?, ?, ?, ?)";
-		jdbcTemplate.update(sqlSaveLocation, pothole.getStreetAddress(), pothole.getCity(), pothole.getZip(), pothole.getComments());
 	}
 	
 	@Override

@@ -9,13 +9,12 @@
 		<th>Pothole ID</th>
 		<th>Street Address</th>
 		<th>City</th>
-		<th>State</th>
 		<th>Zip</th>
 		<th>Comments</th>
 		<th>Submitted On</th>
 		<th class="status">Status</th>
 		<th>Inspection Date</th>
-		<th>Fixed Date</th>
+		<th>Repair Date</th>
 		<th>Priority</th>
 	</tr>
 	<c:forEach items="${potholes}" var="pothole">
@@ -24,10 +23,10 @@
 				<c:param name="potholeId">${pothole.potholeId}</c:param>
 			</c:url>
 			<td id="potholeId"><a href="${updatePotholeHref}">${pothole.potholeId}</a></td>
-			<td>${pothole.location.streetAddress}</td>
-			<td>${pothole.location.city}</td>
-			<td>${pothole.location.zip}</td>
-			<td>${pothole.location.comments}</td>
+			<td>${pothole.streetAddress}</td>
+			<td>${pothole.city}</td>
+			<td>${pothole.zip}</td>
+			<td>${pothole.comments}</td>
 			<td>${pothole.createDate}</td>
 			<c:choose>
 				<c:when test="${pothole.status == 'NEW'}">

@@ -53,7 +53,6 @@ public class UserController {
 	@RequestMapping(path="/report", method=RequestMethod.POST)
 	public String processPotholeReport(@RequestParam String streetAddress,
 									   @RequestParam String city,
-									   @RequestParam String state,
 									   @RequestParam String zip,
 									   @RequestParam String comments,
 									   ModelMap model
@@ -65,8 +64,7 @@ public class UserController {
 		if(!comments.equals("")) {
 			pothole.setComments(comments);
 		}
-		potholeDAO.saveLocation(pothole);
-		potholeDAO.savePothole();
+		potholeDAO.savePothole(pothole);
 		
 		model.put("pothole", pothole);
 		return "redirect:/confirmation";
