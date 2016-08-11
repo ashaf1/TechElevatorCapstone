@@ -32,7 +32,7 @@
 				<select name="status" class="form-control update">
 					<option value="NEW">New</option>
 					<option value="Inspection Scheduled">Inspection Scheduled</option>
-					<option value="Repair_Scheduled">Repair Scheduled</option>
+					<option value="Repair Scheduled">Repair Scheduled</option>
 					<option value="Repaired">Repaired</option>
 				</select>
 			</div>	
