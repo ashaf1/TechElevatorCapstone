@@ -76,3 +76,8 @@ footer {
 	text-align : right;
 	font-weight : bold;
 }
+
+.searchCriteria {
+	display : inline-block;
+	
+}

@@ -11,7 +11,6 @@ public class Pothole {
 	
 	
 	private int potholeId;
-	private Location location;
 	private String status;
 	private String priorityLevel;
 	private LocalDate createDate;
@@ -33,14 +32,6 @@ public class Pothole {
 	
 	public void setPotholeId(int potholeId) {
 		this.potholeId = potholeId;
-	}
-	
-	public Location getLocation() {
-		return location;
-	}
-	
-	public void setLocation(Location location) {
-		this.location = location;
 	}
 	
 	public String getStatus() {

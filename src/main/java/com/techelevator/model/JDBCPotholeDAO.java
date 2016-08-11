@@ -104,7 +104,6 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	}
 
 	private Pothole getPotholeFromResults(SqlRowSet results) {
-		Location location = new Location();
 		Pothole pothole = new Pothole();
 		pothole.setLocationId(results.getInt("location_id"));
 		pothole.setStreetAddress(results.getString("street_address"));
@@ -112,7 +111,6 @@ public class JDBCPotholeDAO implements PotholeDAO {
 		pothole.setZip(results.getString("zip"));
 		pothole.setComments(results.getString("comments"));
 		pothole.setPotholeId(results.getInt("pothole_id"));
-		pothole.setLocation(location);
 		pothole.setStatus(results.getString("status"));
 		Date createDate = results.getDate("create_date");
 		pothole.setCreateDate(createDate.toLocalDate());
@@ -129,5 +127,37 @@ public class JDBCPotholeDAO implements PotholeDAO {
 		}
 		return pothole;
 	}
+
+	@Override
+	public List<Pothole> getPotholesByStatus() {
+	
+		return null;
+	}
+
+	@Override
+	public List<Pothole> getPotholesByPriorityLevel() {
+
+		return null;
+	}
+
+	@Override
+	public List<Pothole> getPotholesByCity() {
+
+		return null;
+	}
+
+	@Override
+	public List<Pothole> getPotholesByStreetAddress() {
+		
+		return null;
+	}
+
+	@Override
+	public List<Pothole> getPotholeByZip() {
+		
+		return null;
+	}
+
+
 	
 }

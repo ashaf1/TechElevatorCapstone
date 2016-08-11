@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.techelevator.model.Location;
 import com.techelevator.model.Pothole;
 import com.techelevator.model.PotholeDAO;
 import com.techelevator.model.UserDAO;
@@ -43,6 +42,15 @@ public class UserController {
 	public String displayReportPage(ModelMap model, @PathVariable String userName) {
 		model.put("potholes", potholeDAO.getAllPotholes());
 		return "searchReports";
+	}
+	@RequestMapping(path="/users/{userName}/reports", method = RequestMethod.POST)
+	public String redirectToSearchReportsPage(@RequestParam (required = false) String status, 
+											  @RequestParam (required = false) String priorityLevel,
+											  @RequestParam (required = false) String city,
+											  @RequestParam (required = false) String streetAddress,
+											  ModelMap model) {		
+		
+		return "redirect:/searchReports";
 	}
 	
 	@RequestMapping(path="/report", method=RequestMethod.GET)

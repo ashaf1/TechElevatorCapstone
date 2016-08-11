@@ -4,6 +4,42 @@
 
 <h2>Pothole Report</h2>
 
+<h3> Search Potholes by Criteria: </h3>
+<div class = "form-group">
+	<form action= "searchReports" method = "POST"> 
+		<div class ="searchCriteria">
+			<label for="status">Status:</label>
+				<select name="status"  class="form-control update">
+					<option value="NEW">New</option>
+					<option value="Inspection Scheduled">Inspection Scheduled</option>
+					<option value="Repair Scheduled">Repair Scheduled</option>
+					<option value="Repaired">Repaired</option>
+				</select>
+			</div>	
+		<div class ="searchCriteria">	
+			<label for= "priorityLevel"> Priority Level:</label>
+				<select name="priorityLevel" class = "form-control update">
+					<option value="">Select A Priority Level</option>
+					<option value="Low">Low</option>
+					<option value="Medium">Medium</option>
+					<option value="High">High</option>
+				</select>
+			</div>				
+			<div class ="searchCriteria"><label for= "city" >City: </label>
+				<input type = "text" name = "city" class = "form-control update">
+			</div>
+			<div class ="searchCriteria"><label for = "streetAddress">Street: </label>
+				<input type = "text" name= "streetAddress" class = "form-control update">
+			</div>
+			<div class ="searchCriteria"><label for = "zip">Zip Code: </label>
+				<input type = "text" name = "zip" class= "form-control update">
+			</div>		
+			<div class ="searchCriteria"><button type="submit" class="btn btn-default">Search</button>
+		    </div>
+ 	</form>
+
+</div>
+
 <table id="potholeReport">
 	<tr>
 		<th>Pothole ID</th>
