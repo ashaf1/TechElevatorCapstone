@@ -73,9 +73,9 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	}
 
 	@Override
-	public void saveLocation(Location location) {
-		String sqlSaveLocation = "INSERT INTO location(street_address, city, state, zip, comments) VALUES(?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sqlSaveLocation, location.getStreetAddress(), location.getCity(), location.getState(), location.getZip(), location.getComments());
+	public void saveLocation(Pothole pothole) {
+		String sqlSaveLocation = "INSERT INTO location(street_address, city, zip, comments) VALUES(?, ?, ?, ?)";
+		jdbcTemplate.update(sqlSaveLocation, pothole.getStreetAddress(), pothole.getCity(), pothole.getZip(), pothole.getComments());
 	}
 	
 	@Override
@@ -107,12 +107,11 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	private Pothole getPotholeFromResults(SqlRowSet results) {
 		Location location = new Location();
 		Pothole pothole = new Pothole();
-		location.setLocationId(results.getInt("location_id"));
-		location.setStreetAddress(results.getString("street_address"));
-		location.setCity(results.getString("city"));
-		location.setState(results.getString("state"));
-		location.setZip(results.getString("zip"));
-		location.setComments(results.getString("comments"));
+		pothole.setLocationId(results.getInt("location_id"));
+		pothole.setStreetAddress(results.getString("street_address"));
+		pothole.setCity(results.getString("city"));
+		pothole.setZip(results.getString("zip"));
+		pothole.setComments(results.getString("comments"));
 		pothole.setPotholeId(results.getInt("pothole_id"));
 		pothole.setLocation(location);
 		pothole.setStatus(results.getString("status"));

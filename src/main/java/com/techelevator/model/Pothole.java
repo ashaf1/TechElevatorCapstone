@@ -17,7 +17,15 @@ public class Pothole {
 	private LocalDate createDate;
 	private LocalDate inspectionDate;
 	private LocalDate fixedDate;
+	private int locationId;
+	private String streetAddress;
+	private String city;
+	private String zip;
+	private String comments;
 	
+	public Pothole(){
+		this.comments = "N/A";
+	}
 	
 	public int getPotholeId() {
 		return potholeId;
@@ -73,6 +81,46 @@ public class Pothole {
 
 	public void setFixedDate(LocalDate fixedDate) {
 		this.fixedDate = fixedDate;
+	}
+
+	public int getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
+	}
+
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	
 	
