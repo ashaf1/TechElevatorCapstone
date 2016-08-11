@@ -61,7 +61,6 @@ public class UserController {
 		Pothole pothole = new Pothole();
 		pothole.setStreetAddress(streetAddress);
 		pothole.setCity(city);
-		pothole.setState(state);
 		pothole.setZip(zip);
 		if(!comments.equals("")) {
 			pothole.setComments(comments);

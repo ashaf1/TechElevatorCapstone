@@ -15,18 +15,29 @@ CREATE TABLE user_table (
 	CONSTRAINT pk_user_id PRIMARY KEY (user_id)
 );
 
+CREATE SEQUENCE location_id_seq
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+
 CREATE TABLE location (
-	location_id serial NOT NULL,
+	location_id integer DEFAULT nextval('location_id_seq'::regclass) NOT NULL,
 	street_address varchar(64) NOT NULL,
 	city varchar(64) NOT NULL,
-	state varchar(2) NOT NULL,
 	zip varchar(12) NOT NULL,
 	comments varchar(300),
 	CONSTRAINT pk_location_id PRIMARY KEY (location_id)
 );
 
+CREATE SEQUENCE pothole_id_seq
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+
 CREATE TABLE pothole (
-	pothole_id serial NOT NULL,
+	pothole_id integer DEFAULT nextval('pothole_id_seq'::regclass) NOT NULL,
 	location_id integer NOT NULL,
 	status varchar(100) NOT NULL DEFAULT 'NEW',
 	priority_level varchar(32),
