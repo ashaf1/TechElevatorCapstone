@@ -26,7 +26,6 @@
 			<td id="potholeId"><a href="${updatePotholeHref}">${pothole.potholeId}</a></td>
 			<td>${pothole.location.streetAddress}</td>
 			<td>${pothole.location.city}</td>
-			<td>${pothole.location.state}</td>
 			<td>${pothole.location.zip}</td>
 			<td>${pothole.location.comments}</td>
 			<td>${pothole.createDate}</td>

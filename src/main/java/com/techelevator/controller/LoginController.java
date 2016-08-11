@@ -30,8 +30,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping(path="/users/new", method=RequestMethod.GET)
-	public String displayNewUserForm() {
-		return "newUser";
+	public String displayNewUserForm(ModelMap model) {
+		User user = getUser(model);
+		if(user.getRole().equals("Administrator")){
+			return "newUser";
+		} 
+		return "unauthorizedPage";
 	}
 	
 	@RequestMapping(path="/users", method=RequestMethod.POST)
@@ -80,7 +84,10 @@ public class LoginController {
 		}
 		
 	}
-	
+	@RequestMapping (path="/unauthorizedPage", method=RequestMethod.GET)
+	public String returnUnauthorizedPage(){
+		return "unauthorizedPage";
+	}
 	@RequestMapping(path="/logout", method=RequestMethod.POST)
 	public String logout(ModelMap model, HttpSession session) {
 		model.remove("currentUser");
@@ -90,5 +97,13 @@ public class LoginController {
 	
 	private boolean isValidRedirect(String destination) {
 		return destination != null && destination.startsWith("http://localhost");
+	}
+	private User getUser(ModelMap model){
+		User user = (User)model.get("user");
+		if(user == null){
+			user = new User();
+			model.put("user", user);
+		}
+		return user;
 	}
 }
