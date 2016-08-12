@@ -8,10 +8,16 @@
 
 	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 	<input type="hidden" name="potholeId" value="${param.potholeId}"/>
+	<c:if test="${currentPothole.status != 'NEW'}">
+		<c:url var="rescheduleInspectionHref" value="/users/${currentUser}/updatePothole?potholeId=${param.potholeId}">
+			<c:param name="rescheduleInspection" value="true" />
+		</c:url>
+		<a href="${rescheduleInspectionHref}">Reschedule Inspection</a>
+	</c:if>
 	<div class="row">
 		<div class="col-sm-6">
 			<c:choose>
-				<c:when test="${currentPothole.status == 'NEW'}">
+				<c:when test="${currentPothole.status == 'NEW' || param.rescheduleInspection == 'true'}">
 				<input type="hidden" name = "priorityLevel" value=""/>
 						<div id="inspectionDate" class="form-group">
 							<label for="inspectionDate">Inspection Date: </label>
@@ -83,6 +89,7 @@
 						<select name="status" id="status" class="form-control update">
 							<option value="Repair Scheduled">Repair Scheduled</option>
 							<option value="Repaired">Repaired</option>
+							<option value="Duplicate">Duplicate</option>
 						</select>
 					</div>		
 				</c:when>		

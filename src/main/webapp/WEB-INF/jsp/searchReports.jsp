@@ -6,7 +6,7 @@
 
 <h3> Search Potholes by Criteria: </h3>
 <div class = "form-group">
-	<form action= "searchReports" method = "POST"> 
+	<form action= "users/${currentUser}/reports" method = "POST"> 
 	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 		<div class ="searchCriteria">
 			<label for="status">Status:</label>
@@ -15,6 +15,7 @@
 					<option value="Inspection Scheduled">Inspection Scheduled</option>
 					<option value="Repair Scheduled">Repair Scheduled</option>
 					<option value="Repaired">Repaired</option>
+					<option value="Duplicate">Duplicate</option>
 				</select>
 			</div>	
 		<div class ="searchCriteria">	
