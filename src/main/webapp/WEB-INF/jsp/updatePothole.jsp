@@ -71,10 +71,12 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${currentPothole.fixedDate != null && currentPothole.status != 'Repaired'}">
-							<h5>Repairs scheduled for ${currentPothole.fixedDate}</h5>
+							<h5>Repairs scheduled for:</h5>
+							<h5>${currentPothole.fixedDate}</h5>
 						</c:when>
 						<c:when test="${currentPothole.fixedDate != null && currentPothole.status == 'Repaired'}">
-							<h5>Repaired on ${currentPothole.fixedDate}</h5>
+							<h5>Repaired on:</h5>
+							<h5>${currentPothole.fixedDate}</h5>
 						</c:when>
 					</c:choose>
 					<div id ="priorityLevel" class="form-group">
