@@ -4,11 +4,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.sql.Array;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 public class JDBCPotholeDAO implements PotholeDAO {
 	
 	JdbcTemplate jdbcTemplate;
+	NamedParameterJdbcOperations namedParameterJdbcOperations; 
 	
 	@Autowired
 	public JDBCPotholeDAO(DataSource dataSource) {
@@ -132,19 +134,26 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String streetAddress, String zip) {
 		List<Pothole> potholes = new ArrayList<>();
 		String sqlGetFilteredPotholes = "SELECT * FROM pothole JOIN location ON pothole.location_id = location.location_id WHERE status = ? ";
+		List <String> params = new ArrayList<>();
 		if(priorityLevel != null){
 			sqlGetFilteredPotholes += "AND priority_level = ? ";
+			params.add(priorityLevel);
 		}
 		if(city != null){
 			sqlGetFilteredPotholes += "AND UPPER(city) = ? ";
+			params.add(city);
 		}
 		if(streetAddress != null){
-			sqlGetFilteredPotholes += "AND UPPER(street_address) LIKE '%?%' ";
+			sqlGetFilteredPotholes += "AND UPPER(street_address) LIKE ? ";
+			params.add("%"+streetAddress.toUpperCase()+"%");
 		}
 		if(zip != null){
-			sqlGetFilteredPotholes += "AND zip = ?";
+			sqlGetFilteredPotholes += "AND zip = ? ";
+			params.add(zip);
 		}
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetFilteredPotholes, status, priorityLevel, city, streetAddress, zip);
+		sqlGetFilteredPotholes += "ORDER BY pothole.pothole_id ASC";
+		String [] param = (String[])params.toArray();
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetFilteredPotholes, status, param);
 		
 		while(results.next()){
 			Pothole p = getPotholeFromResults(results);
