@@ -39,90 +39,90 @@ public class UserController {
 		return "userDashboard";
 	}
 	
-	@RequestMapping(path="/users/{userName}/reports", method=RequestMethod.GET)
-	public String displayReportPage(ModelMap model, @RequestParam (required = false) String status, 
-			  										@RequestParam (required = false) String priorityLevel,
-			  										@RequestParam (required = false) String city,
-			  										@RequestParam (required = false) String streetAddress,
-			  										@RequestParam (required = false) String zip,
-			  										@PathVariable String userName) {
-		model.put("potholes", potholeDAO.getAllPotholes());
+//	@RequestMapping(path="/users/{userName}/reports", method=RequestMethod.GET)
+//	public String displayReportPage(ModelMap model, @RequestParam (required = false) String status, 
+//			  										@RequestParam (required = false) String priorityLevel,
+//			  										@RequestParam (required = false) String city,
+//			  										@RequestParam (required = false) String streetAddress,
+//			  										@RequestParam (required = false) String zip,
+//			  										@PathVariable String userName) {
+//		model.put("potholes", potholeDAO.getAllPotholes());
+////		model.put("filteredPotholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
+//		
+//		return "searchReports";
+//	}
+//	@RequestMapping(path="/users/{userName}/reports", method = RequestMethod.POST)
+//	public String redirectToSearchReportsPage(@RequestParam (required = false) String status, 
+//											  @RequestParam (required = false) String priorityLevel,
+//											  @RequestParam (required = false) String city,
+//											  @RequestParam (required = false) String streetAddress,
+//											  @RequestParam (required = false) String zip,
+//											  @PathVariable String userName,
+//											  ModelMap model) {	
+//		
+//		
 //		model.put("filteredPotholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
-		
-		return "searchReports";
-	}
-	@RequestMapping(path="/users/{userName}/reports", method = RequestMethod.POST)
-	public String redirectToSearchReportsPage(@RequestParam (required = false) String status, 
-											  @RequestParam (required = false) String priorityLevel,
-											  @RequestParam (required = false) String city,
-											  @RequestParam (required = false) String streetAddress,
-											  @RequestParam (required = false) String zip,
-											  @PathVariable String userName,
-											  ModelMap model) {	
-		
-		
-		model.put("filteredPotholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
-		
-		return "redirect:/searchReports";
-	}
+//		
+//		return "redirect:/searchReports";
+//	}
+//	
+//	@RequestMapping(path="/report", method=RequestMethod.GET)
+//	public String displayReportPotholePage(ModelMap model) {
+//		return "report";
+//	}
+//	
+//	@RequestMapping(path="/report", method=RequestMethod.POST)
+//	public String processPotholeReport(@RequestParam String streetAddress,
+//									   @RequestParam String city,
+//									   @RequestParam String zip,
+//									   @RequestParam String comments,
+//									   ModelMap model
+//										) {
+//		Pothole pothole = new Pothole();
+//		pothole.setStreetAddress(streetAddress);
+//		pothole.setCity(city);
+//		pothole.setZip(zip);
+//		if(!comments.equals("")) {
+//			pothole.setComments(comments);
+//		}
+//		potholeDAO.savePothole(pothole);
+//		
+//		model.put("pothole", pothole);
+//		return "redirect:/confirmation";
+//	}
 	
-	@RequestMapping(path="/report", method=RequestMethod.GET)
-	public String displayReportPotholePage(ModelMap model) {
-		return "report";
-	}
-	
-	@RequestMapping(path="/report", method=RequestMethod.POST)
-	public String processPotholeReport(@RequestParam String streetAddress,
-									   @RequestParam String city,
-									   @RequestParam String zip,
-									   @RequestParam String comments,
-									   ModelMap model
-										) {
-		Pothole pothole = new Pothole();
-		pothole.setStreetAddress(streetAddress);
-		pothole.setCity(city);
-		pothole.setZip(zip);
-		if(!comments.equals("")) {
-			pothole.setComments(comments);
-		}
-		potholeDAO.savePothole(pothole);
-		
-		model.put("pothole", pothole);
-		return "redirect:/confirmation";
-	}
-	
-	@RequestMapping(path="/confirmation", method=RequestMethod.GET)
-	public String displayConfirmationPage(ModelMap model) {
-		return "confirmation";
-	}
-	@RequestMapping(path="/users/{userName}/updatePothole", method=RequestMethod.GET)
-	public String displayUpdatePotholePage(ModelMap model, @RequestParam int potholeId, @PathVariable String userName){
-		model.put("currentPothole", potholeDAO.getPotholeByID(potholeId));
-		return "updatePothole";
-	}
-	@RequestMapping(path="/users/{userName}/updatePothole", method=RequestMethod.POST)
-	public String redirectToSearchReports(@PathVariable String userName,
-										  @RequestParam int potholeId,
-										  @RequestParam (required=false) String priorityLevel, 
-										  @RequestParam (required=false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate inspectionDate,
-										  @RequestParam (required=false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate repairDate,
-										  @RequestParam String status){
-		if(priorityLevel.equals("") == false){
-			potholeDAO.updatePotholePriority(potholeId, priorityLevel);
-		}
-		if(inspectionDate != null){
-			potholeDAO.updatePotholeInspectionDate(potholeId, inspectionDate);
-		}
-		if(repairDate != null){
-			potholeDAO.updatePotholeFixedDate(potholeId, repairDate);
-		}
-		if(status.equals("NEW") == false){
-			potholeDAO.updatePotholeStatus(potholeId, status);
-		}
-		
-		
-		return "redirect:/users/"+userName+"/reports";
-	}
+//	@RequestMapping(path="/confirmation", method=RequestMethod.GET)
+//	public String displayConfirmationPage(ModelMap model) {
+//		return "confirmation";
+//	}
+//	@RequestMapping(path="/users/{userName}/updatePothole", method=RequestMethod.GET)
+//	public String displayUpdatePotholePage(ModelMap model, @RequestParam int potholeId, @PathVariable String userName){
+//		model.put("currentPothole", potholeDAO.getPotholeByID(potholeId));
+//		return "updatePothole";
+//	}
+//	@RequestMapping(path="/users/{userName}/updatePothole", method=RequestMethod.POST)
+//	public String redirectToSearchReports(@PathVariable String userName,
+//										  @RequestParam int potholeId,
+//										  @RequestParam (required=false) String priorityLevel, 
+//										  @RequestParam (required=false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate inspectionDate,
+//										  @RequestParam (required=false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate repairDate,
+//										  @RequestParam String status){
+//		if(priorityLevel.equals("") == false){
+//			potholeDAO.updatePotholePriority(potholeId, priorityLevel);
+//		}
+//		if(inspectionDate != null){
+//			potholeDAO.updatePotholeInspectionDate(potholeId, inspectionDate);
+//		}
+//		if(repairDate != null){
+//			potholeDAO.updatePotholeFixedDate(potholeId, repairDate);
+//		}
+//		if(status.equals("NEW") == false){
+//			potholeDAO.updatePotholeStatus(potholeId, status);
+//		}
+//		
+//		
+//		return "redirect:/users/"+userName+"/reports";
+//	}
 	
 	@RequestMapping(path="/users/{userName}/changePassword", method=RequestMethod.GET)
 	public String displayChangePasswordForm(ModelMap model, @PathVariable String userName) {
