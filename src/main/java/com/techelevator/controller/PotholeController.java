@@ -19,7 +19,7 @@ import com.techelevator.model.UserDAO;
 
 @Transactional
 @Controller
-@SessionAttributes({"allPotholes", "pothole"})
+@SessionAttributes({"potholes", "pothole"})
 public class PotholeController {
 	
 	private UserDAO userDAO;
@@ -45,7 +45,7 @@ public class PotholeController {
 	}
 	
 	@RequestMapping(path="/users/{userName}/reports", method = RequestMethod.POST)
-	public String redirectToSearchReportsPage(@RequestParam (required = false) String status, 
+	public String redirectToAdvancedSearchPage(@RequestParam (required = false) String status, 
 											  @RequestParam (required = false) String priorityLevel,
 											  @RequestParam (required = false) String city,
 											  @RequestParam (required = false) String streetAddress,
@@ -54,9 +54,14 @@ public class PotholeController {
 											  ModelMap model) {	
 		
 		
-		model.put("filteredPotholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
+		model.put("potholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
 		
-		return "redirect:/searchReports";
+		return "redirect:/users/"+userName+"/advancedSearch";
+	}
+	
+	@RequestMapping(path="/users/{userName}/advancedSearch", method=RequestMethod.GET)
+	public String dislayAdvancedSearchPage(@PathVariable String userName) {
+		return "advancedSearch";
 	}
 	
 	@RequestMapping(path="/report", method=RequestMethod.GET)

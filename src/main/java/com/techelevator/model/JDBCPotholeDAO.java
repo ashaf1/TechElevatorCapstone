@@ -133,27 +133,32 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	@Override
 	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String streetAddress, String zip) {
 		List<Pothole> potholes = new ArrayList<>();
-		String sqlGetFilteredPotholes = "SELECT * FROM pothole JOIN location ON pothole.location_id = location.location_id WHERE status = ? ";
+		String sqlGetFilteredPotholes = "SELECT * FROM pothole JOIN location ON pothole.location_id = location.location_id WHERE 1=1 ";
 		List <String> params = new ArrayList<>();
-		if(priorityLevel != null){
+		
+		if(!status.equals("")){
+			sqlGetFilteredPotholes += "AND status = ? ";
+			params.add(status);
+		}
+		if(!priorityLevel.equals("")){
 			sqlGetFilteredPotholes += "AND priority_level = ? ";
 			params.add(priorityLevel);
 		}
-		if(city != null){
+		if(!city.equals("")){
 			sqlGetFilteredPotholes += "AND UPPER(city) = ? ";
-			params.add(city);
+			params.add(city.toUpperCase());
 		}
-		if(streetAddress != null){
+		if(!streetAddress.equals("")){
 			sqlGetFilteredPotholes += "AND UPPER(street_address) LIKE ? ";
 			params.add("%"+streetAddress.toUpperCase()+"%");
 		}
-		if(zip != null){
+		if(!zip.equals("")){
 			sqlGetFilteredPotholes += "AND zip = ? ";
 			params.add(zip);
 		}
 		sqlGetFilteredPotholes += "ORDER BY pothole.pothole_id ASC";
-		String [] param = (String[])params.toArray();
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetFilteredPotholes, status, param);
+		Object [] param = params.toArray();
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetFilteredPotholes, param);
 		
 		while(results.next()){
 			Pothole p = getPotholeFromResults(results);
