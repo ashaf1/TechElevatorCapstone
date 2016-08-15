@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 	
-		$("form").validate({
+		$("#newUser").validate({
 			rules : {
 				password : {
 					required : true,
@@ -37,13 +37,16 @@
 </script>
 
 <c:url var="formAction" value="/users" />
-<form method="POST" action="${formAction}">
+<form method="POST" action="${formAction}" id="newUser">
 	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="form-group">
 				<label for="role">Role: </label>
-				<input type="text" id="role" name="role" placeHolder="Role" class="form-control" />
+				<select name="role"  class="form-control update">
+					<option value="Employee">Employee</option>
+					<option value="Administrator">Administrator</option>
+				</select>
 			</div>	
 			<div class="form-group">
 				<label for="firstName">First Name: </label>

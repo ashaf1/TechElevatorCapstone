@@ -23,10 +23,10 @@
 							<label for="inspectionDate">Inspection Date: </label>
 							<c:choose>
 								<c:when test="${currentPothole.inspectionDate != null}">
-									<input type="date" name="inspectionDate" class="form-control update" value="${currentPothole.inspectionDate}" id="inspectionDate"/>
+									<input type="date" name="inspectionDate" class="form-control update" value="${currentPothole.inspectionDate}" id="inspectionDate" min="${currentPothole.createDate}"/>
 								</c:when>
 								<c:otherwise>
-									<input type="date" name="inspectionDate" class="form-control update" id="inspectionDate"/>
+									<input type="date" name="inspectionDate" class="form-control update" id="inspectionDate" min="${currentPothole.createDate}"/>
 								</c:otherwise>
 							</c:choose>
 						</div>
