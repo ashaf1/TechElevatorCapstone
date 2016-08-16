@@ -129,6 +129,18 @@ public class JDBCPotholeDAO implements PotholeDAO {
 		}
 		return pothole;
 	}
+	public List<Pothole> getPotholesNotDuplicateOrRepaired(){
+		String sqlGetNonDuplicateOrRepaired = "Select * from pothole "
+											+ "Join location on pothole.location_id = location.location_id "
+											+ "Where pothole.status <> 'Repaired' AND pothole.status <> 'Duplicate' ";
+		List<Pothole> potholes = new ArrayList<>();
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetNonDuplicateOrRepaired);
+		while(results.next()) {
+			Pothole pothole = getPotholeFromResults(results);
+			potholes.add(pothole);
+		}
+		return potholes;
+	}
 
 	@Override
 	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String streetAddress, String zip) {
