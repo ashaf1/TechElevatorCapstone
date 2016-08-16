@@ -16,17 +16,24 @@
 
 <h3>Pothole Map</h3>
     <div id="map"></div>
-    <script>
+   <!--  <script>
       function initMap() {
         var mapDiv = document.getElementById('map');
         var map = new google.maps.Map(mapDiv, {
             center: {lat: 41.4993, lng: -81.6944},
             zoom: 12
         });
+        var myLatLng = {lat: 41.4993, lng: -81.6944};
+        var marker = new google.maps.Marker ({
+        	position: myLatLng,
+        	map: map,
+        	title: "Cleveland Baby!"
+        });
       }
-    </script>
+    </script> -->
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3emkM7-taWJSEiEmOWIKxTCBdcLI01vo&callback=initMap">
     </script>
+    <script src="js/map.marker.js"></script>
 
 <c:import url="/WEB-INF/jsp/footer.jsp" />
