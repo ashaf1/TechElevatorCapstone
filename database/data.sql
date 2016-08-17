@@ -13,14 +13,14 @@ VALUES('Employee', 'Callum', 'Orr', 'COrr', 'j4RJPwDy8LUjeJTvLxiGJg==', 'LsO4tIq
 INSERT INTO user_table(role, first_name, last_name, user_name, password, salt)
 VALUES('Employee', 'Aaron', 'Shafron', 'AShafron', 'S0yNhgwy+2UN9vTkLxBaZQ==', 'FMtGo36D/gyxDgXJUJObZKvttktI0ytMWPTe3WcgZ7VXHOXjn3JP+pt9GC8SaRsvhpVDfxbQn2ScxLmyaiHxRWP1dmbSU3QhmdcGoKjZgRP2rN/M0Lvqv/20HDPSZVvibDt7V9eYRRvQF62gA9+46v9DWoWBw7jjnV4Tf5Urons=');
 
-INSERT INTO location(street_address, city, zip, comments)
-VALUES('7100 Euclid Ave', 'Cleveland', '44103', 'Located right outside in front of the building.');
+INSERT INTO location(address_number, street, city, zip, comments)
+VALUES('7100', 'Euclid Ave', 'Cleveland', '44103', 'Located right outside in front of the building.');
 
-INSERT INTO location(street_address, city, zip, comments)
-VALUES('123 Smith Rd', 'Brunswick', '44212', 'N/A');
+INSERT INTO location(address_number, street, city, zip, comments)
+VALUES('123', 'Smith Rd', 'Brunswick', '44212', 'N/A');
 
-INSERT INTO location(street_address, city, zip, comments)
-VALUES('Main St', 'Stow', '44224', 'Located between the red house and the green building.');
+INSERT INTO location(street, city, zip, comments)
+VALUES('Darrow Rd', 'Stow', '44224', 'Located between the red house and the green building.');
 
 INSERT INTO pothole(location_id)
 VALUES (1);

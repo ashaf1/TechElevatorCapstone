@@ -44,6 +44,8 @@
 						<li><a href="${dashboardHref}">My Account</a></li>
 						<c:url var="viewReportsHref" value="/users/${currentUser}/reports" />
 						<li><a href="${viewReportsHref}">View Reports</a></li>
+						<c:url var="viewMetricsHref" value="/users/${currentUser}/metrics"/>
+						<li><a href="${viewMetricsHref}">View Pothole Metrics</a></li>
 						<c:if test="${user.role == 'Administrator'}">
 							<c:url var="newUserHref" value="/users/new" />
 							<li><a href="${newUserHref}">Create New User</a></li>

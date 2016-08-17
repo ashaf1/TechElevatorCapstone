@@ -28,8 +28,8 @@
 					<option value="High">High</option>
 				</select>
 			</div>				
-			<div class ="searchCriteria"><label for = "streetAddress">Street: </label>
-				<input type = "text" name= "streetAddress" class = "form-control update">
+			<div class ="searchCriteria"><label for = "street">Street: </label>
+				<input type = "text" name= "street" class = "form-control update">
 			</div>
 			<div class ="searchCriteria"><label for= "city" >City: </label>
 				<input type = "text" name = "city" class = "form-control update">

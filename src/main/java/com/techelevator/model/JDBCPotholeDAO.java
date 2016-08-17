@@ -27,8 +27,8 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	@Override
 	public void savePothole(Pothole pothole) {
 		
-		String sqlSaveLocation = "INSERT INTO location(street_address, city, zip, comments) VALUES(?, ?, ?, ?)";
-		jdbcTemplate.update(sqlSaveLocation, pothole.getStreetAddress(), pothole.getCity(), pothole.getZip(), pothole.getComments());
+		String sqlSaveLocation = "INSERT INTO location(address_number, street, city, zip, comments) VALUES(?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sqlSaveLocation, pothole.getAddressNumber(),pothole.getStreet(), pothole.getCity(), pothole.getZip(), pothole.getComments());
 		
 		String sqlSearchForLocationId = "SELECT lastval() AS last_location FROM location limit 1";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSearchForLocationId);
@@ -108,7 +108,8 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	private Pothole getPotholeFromResults(SqlRowSet results) {
 		Pothole pothole = new Pothole();
 		pothole.setLocationId(results.getInt("location_id"));
-		pothole.setStreetAddress(results.getString("street_address"));
+		pothole.setAddressNumber(results.getString("address_number"));
+		pothole.setStreet(results.getString("street"));
 		pothole.setCity(results.getString("city"));
 		pothole.setZip(results.getString("zip"));
 		pothole.setComments(results.getString("comments"));
@@ -143,7 +144,7 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	}
 
 	@Override
-	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String streetAddress, String zip) {
+	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String street, String zip) {
 		List<Pothole> potholes = new ArrayList<>();
 		String sqlGetFilteredPotholes = "SELECT * FROM pothole JOIN location ON pothole.location_id = location.location_id WHERE 1=1 ";
 		List <String> params = new ArrayList<>();
@@ -160,9 +161,9 @@ public class JDBCPotholeDAO implements PotholeDAO {
 			sqlGetFilteredPotholes += "AND UPPER(city) = ? ";
 			params.add(city.toUpperCase());
 		}
-		if(!streetAddress.equals("")){
-			sqlGetFilteredPotholes += "AND UPPER(street_address) LIKE ? ";
-			params.add("%"+streetAddress.toUpperCase()+"%");
+		if(!street.equals("")){
+			sqlGetFilteredPotholes += "AND UPPER(street) LIKE ? ";
+			params.add("%"+street.toUpperCase()+"%");
 		}
 		if(!zip.equals("")){
 			sqlGetFilteredPotholes += "AND zip = ? ";
@@ -179,7 +180,16 @@ public class JDBCPotholeDAO implements PotholeDAO {
 		return potholes;
 	}
 
-	
-
+	@Override
+	public double getAverageRepairTimeInDays() {
+		double averageRepairTime = 0;
+		String sqlGetAvgRepairTime = "Select cast(avg(fixed_date - create_date) as numeric(10,2)) as avg_repair_time "
+									+"From pothole Where status = 'Repaired'";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetAvgRepairTime);
+		if(results.next()){
+			averageRepairTime = results.getDouble("avg_repair_time");
+		}
+		return averageRepairTime;
+	}
 	
 }

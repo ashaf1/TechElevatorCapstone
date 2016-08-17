@@ -28,7 +28,12 @@ $(document).ready(function (e) {
 		var $mapBody = $("#map");
 		var geocoder = new google.maps.Geocoder();
 		for(var i = 0; i < mapData.length; i++) {
-			var address = mapData[i].streetAddress+", "+mapData[i].zip;
+			var address;
+			if(mapData[i].addressNumber == null){
+				address = mapData[i].street+" "+mapData[i].zip;
+			} else {
+				address = mapData[i].addressNumber +" "+mapData[i].street+" "+mapData[i].zip;
+			}
 			geocoder.geocode({'address' : address}, function(results, status) {
 				if(status == 'OK') {
 					var marker = new google.maps.Marker({

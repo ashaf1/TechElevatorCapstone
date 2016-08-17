@@ -28,8 +28,8 @@
 					<option value="High">High</option>
 				</select>
 			</div>				
-			<div class ="searchCriteria"><label for = "streetAddress">Street: </label>
-				<input type = "text" name= "streetAddress" class = "form-control update">
+			<div class ="searchCriteria"><label for = "street">Street: </label>
+				<input type = "text" name= "street" class = "form-control update">
 			</div>
 			<div class ="searchCriteria"><label for= "city" >City: </label>
 				<input type = "text" name = "city" class = "form-control update">
@@ -46,7 +46,8 @@
 <table id="potholeReport">
 	<tr>
 		<th>Pothole ID</th>
-		<th>Street Address</th>
+		<th>Address Number</th>
+		<th>Street</th>
 		<th>City</th>
 		<th>Zip</th>
 		<th>Comments</th>
@@ -63,7 +64,8 @@
 				<c:param name="potholeId">${pothole.potholeId}</c:param>
 			</c:url>
 			<td id="potholeId"><a href="${updatePotholeHref}">${pothole.potholeId}</a></td>
-			<td>${pothole.streetAddress}</td>
+			<td>${pothole.addressNumber}</td>
+			<td>${pothole.street}</td>
 			<td>${pothole.city}</td>
 			<td>${pothole.zip}</td>
 			<td>${pothole.comments}</td>

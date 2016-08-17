@@ -9,8 +9,12 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="form-group">
-				<label for="streetAddress">Street Address: </label>
-				<input type="text" name="streetAddress" class="form-control"/>
+				<label for="addressNumber">Address Number: </label>
+				<input type="text" name="addressNumber" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="street">Street: </label>
+				<input type="text" name="street" class="form-control"/>
 			</div>	
 			<div class="form-group">
 				<label for="city">City: </label>

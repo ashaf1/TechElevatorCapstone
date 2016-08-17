@@ -13,6 +13,6 @@ public interface PotholeDAO {
 	public void updatePotholeInspectionDate(int potholeId, LocalDate date);
 	public void updatePotholeFixedDate(int potholeId, LocalDate date);
 	public Pothole getLastPothole();
-	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String streetAddress, String zip);
-	
+	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String street, String zip);
+	public double getAverageRepairTimeInDays();
 }

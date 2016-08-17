@@ -23,7 +23,8 @@ CREATE SEQUENCE location_id_seq
 
 CREATE TABLE location (
 	location_id integer DEFAULT nextval('location_id_seq'::regclass) NOT NULL,
-	street_address varchar(64) NOT NULL,
+	address_number varchar(64),
+	street varchar(64) NOT NULL,
 	city varchar(64) NOT NULL,
 	zip varchar(12) NOT NULL,
 	comments varchar(300),

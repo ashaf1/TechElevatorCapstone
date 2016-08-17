@@ -38,9 +38,7 @@ public class PotholeController {
 			  										@RequestParam (required = false) String streetAddress,
 			  										@RequestParam (required = false) String zip,
 			  										@PathVariable String userName) {
-		model.put("potholes", potholeDAO.getAllPotholes());
-//		model.put("filteredPotholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
-		
+		model.put("potholes", potholeDAO.getAllPotholes());		
 		return "searchReports";
 	}
 	
@@ -48,13 +46,13 @@ public class PotholeController {
 	public String redirectToAdvancedSearchPage(@RequestParam (required = false) String status, 
 											  @RequestParam (required = false) String priorityLevel,
 											  @RequestParam (required = false) String city,
-											  @RequestParam (required = false) String streetAddress,
+											  @RequestParam (required = false) String street,
 											  @RequestParam (required = false) String zip,
 											  @PathVariable String userName,
 											  ModelMap model) {	
 		
 		
-		model.put("potholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, streetAddress, zip));
+		model.put("potholes", potholeDAO.getPotholesByCriteria(status, priorityLevel, city, street, zip));
 		
 		return "redirect:/users/"+userName+"/advancedSearch";
 	}
@@ -70,14 +68,16 @@ public class PotholeController {
 	}
 	
 	@RequestMapping(path="/report", method=RequestMethod.POST)
-	public String processPotholeReport(@RequestParam String streetAddress,
+	public String processPotholeReport(@RequestParam (required = false) String addressNumber,
+									   @RequestParam String street,
 									   @RequestParam String city,
 									   @RequestParam String zip,
 									   @RequestParam String comments,
 									   ModelMap model
 										) {
 		Pothole pothole = new Pothole();
-		pothole.setStreetAddress(streetAddress);
+		pothole.setAddressNumber(addressNumber);
+		pothole.setStreet(street);
 		pothole.setCity(city);
 		pothole.setZip(zip);
 		if(!comments.equals("")) {
@@ -122,5 +122,14 @@ public class PotholeController {
 		
 		return "redirect:/users/"+userName+"/reports";
 	}
-
+	
+	@RequestMapping(path="/users/{userName}/metrics", method=RequestMethod.GET)
+	public String displayPotholeMetricsPage(@PathVariable String userName,
+											@RequestParam (required=false) Double avgRepairTime, 
+											ModelMap model){
+		avgRepairTime = potholeDAO.getAverageRepairTimeInDays();
+		model.put("avgRepairTime", avgRepairTime);
+		
+		return "metrics";
+	}
 }

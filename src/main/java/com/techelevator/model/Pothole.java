@@ -17,10 +17,12 @@ public class Pothole {
 	private LocalDate inspectionDate;
 	private LocalDate fixedDate;
 	private int locationId;
-	private String streetAddress;
+	private String addressNumber;
+	private String street;
 	private String city;
 	private String zip;
 	private String comments;
+	
 	
 	public Pothole(){
 		this.comments = "N/A";
@@ -82,12 +84,20 @@ public class Pothole {
 		this.locationId = locationId;
 	}
 
-	public String getStreetAddress() {
-		return streetAddress;
+	public String getAddressNumber() {
+		return addressNumber;
 	}
 
-	public void setStreetAddress(String streetAddress) {
-		this.streetAddress = streetAddress;
+	public void setAddressNumber(String addressNumber) {
+		this.addressNumber = addressNumber;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	public String getCity() {
