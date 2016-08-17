@@ -192,4 +192,18 @@ public class JDBCPotholeDAO implements PotholeDAO {
 		return averageRepairTime;
 	}
 	
+	@Override
+	public String cityWithMostPotholesAndNumOfPotholes(){
+		String cityAndNumOfPotholes;
+		String sqlGetCityAndNumOfPotholes = "Select count(city) as num_potholes, city from location "
+										  + "Join pothole on pothole.location_id = location.location_id "
+										  + "Where status <> 'Repaired' AND status <> 'Duplicate' group by city order by num_potholes desc limit 1";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCityAndNumOfPotholes);
+		
+		cityAndNumOfPotholes = results.getString("num_potholes") + " in " +results.getString("city");
+		
+		return cityAndNumOfPotholes;
+	}
+	
+	@Override String city 
 }
