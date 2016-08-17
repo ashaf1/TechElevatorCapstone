@@ -17,4 +17,5 @@ public interface PotholeDAO {
 	public List<Pothole> getPotholesByCriteria(String status, String priorityLevel, String city, String street, String zip);
 	public double getAverageRepairTimeInDays();
 	public String cityWithMostPotholesAndNumOfPotholes();
+	public String streetWithMostPotholes();
 }

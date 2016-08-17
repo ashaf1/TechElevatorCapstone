@@ -194,16 +194,27 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	
 	@Override
 	public String cityWithMostPotholesAndNumOfPotholes(){
-		String cityAndNumOfPotholes;
+		String cityAndNumOfPotholes = "";
 		String sqlGetCityAndNumOfPotholes = "Select count(city) as num_potholes, city from location "
 										  + "Join pothole on pothole.location_id = location.location_id "
 										  + "Where status <> 'Repaired' AND status <> 'Duplicate' group by city order by num_potholes desc limit 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCityAndNumOfPotholes);
-		
-		cityAndNumOfPotholes = results.getString("num_potholes") + " in " +results.getString("city");
-		
+		if(results.next()){
+		cityAndNumOfPotholes = Integer.toString(results.getInt("num_potholes")) + " in " +results.getString("city");
+		}
 		return cityAndNumOfPotholes;
 	}
 	
-	@Override String city 
+	@Override 
+	public String streetWithMostPotholes(){
+		String streetWithNumOfPotholesAndCity = "";
+		String sqlGetStreetWtihPotholesAndCity = "Select count(street) as num_potholes, street, city "
+											   + "From location join pothole on pothole.location_id = location.location_id "
+											   + "Where status <> 'Repaired' AND status <> 'Duplicate' group by street,city order by count(street) desc limit 1";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetStreetWtihPotholesAndCity);
+		if(results.next()){
+		streetWithNumOfPotholesAndCity = Integer.toString(results.getInt("num_potholes")) + " on "+results.getString("street")+" in "+results.getString("city");
+		}
+		return streetWithNumOfPotholesAndCity;
+	}
 }

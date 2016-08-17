@@ -125,10 +125,15 @@ public class PotholeController {
 	
 	@RequestMapping(path="/users/{userName}/metrics", method=RequestMethod.GET)
 	public String displayPotholeMetricsPage(@PathVariable String userName,
-											@RequestParam (required=false) Double avgRepairTime, 
 											ModelMap model){
-		avgRepairTime = potholeDAO.getAverageRepairTimeInDays();
-		model.put("avgRepairTime", avgRepairTime);
+		
+		model.put("avgRepairTime", potholeDAO.getAverageRepairTimeInDays());
+		
+		
+		model.put("streetWithMostPotholes", potholeDAO.streetWithMostPotholes());
+		
+		
+		model.put("cityMostPotholes", potholeDAO.cityWithMostPotholesAndNumOfPotholes());
 		
 		return "metrics";
 	}
