@@ -195,12 +195,12 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	@Override
 	public String cityWithMostPotholesAndNumOfPotholes(){
 		String cityAndNumOfPotholes = "";
-		String sqlGetCityAndNumOfPotholes = "Select count(city) as num_potholes, city from location "
+		String sqlGetCityAndNumOfPotholes = "Select count(*) as num_potholes, city from location "
 										  + "Join pothole on pothole.location_id = location.location_id "
 										  + "Where status <> 'Repaired' AND status <> 'Duplicate' group by city order by num_potholes desc limit 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCityAndNumOfPotholes);
 		if(results.next()){
-		cityAndNumOfPotholes = Integer.toString(results.getInt("num_potholes")) + " in " +results.getString("city");
+		cityAndNumOfPotholes = Integer.toString(results.getInt("num_potholes")) + " potholes in " +results.getString("city");
 		}
 		return cityAndNumOfPotholes;
 	}
@@ -208,13 +208,25 @@ public class JDBCPotholeDAO implements PotholeDAO {
 	@Override 
 	public String streetWithMostPotholes(){
 		String streetWithNumOfPotholesAndCity = "";
-		String sqlGetStreetWtihPotholesAndCity = "Select count(street) as num_potholes, street, city "
+		String sqlGetStreetWtihPotholesAndCity = "Select count(*) as num_potholes, street, city "
 											   + "From location join pothole on pothole.location_id = location.location_id "
 											   + "Where status <> 'Repaired' AND status <> 'Duplicate' group by street,city order by count(street) desc limit 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetStreetWtihPotholesAndCity);
 		if(results.next()){
-		streetWithNumOfPotholesAndCity = Integer.toString(results.getInt("num_potholes")) + " on "+results.getString("street")+" in "+results.getString("city");
+		streetWithNumOfPotholesAndCity = Integer.toString(results.getInt("num_potholes")) + " potholes on "+results.getString("street")+" in "+results.getString("city");
 		}
 		return streetWithNumOfPotholesAndCity;
+	}
+	@Override
+	public String zipWithMostPotholes(){
+		String zipAndCityWithMostPotholes = "";
+		String sqlGetZipAndCityWithMostPotholes = "Select count(*) as num_potholes, zip, city from location "
+												+ "Join pothole on pothole.location_id = location.location_id "
+												+ "Where status <> 'Repaired' AND status <> 'Duplicate' group by city, zip order by num_potholes desc limit 1";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetZipAndCityWithMostPotholes);
+		if(results.next()){
+			zipAndCityWithMostPotholes = Integer.toString(results.getInt("num_potholes")) + " potholes in " + results.getString("zip") + ", "+results.getString("city");
+		}
+		return zipAndCityWithMostPotholes;
 	}
 }

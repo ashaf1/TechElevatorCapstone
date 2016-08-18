@@ -128,12 +128,9 @@ public class PotholeController {
 											ModelMap model){
 		
 		model.put("avgRepairTime", potholeDAO.getAverageRepairTimeInDays());
-		
-		
 		model.put("streetWithMostPotholes", potholeDAO.streetWithMostPotholes());
-		
-		
 		model.put("cityMostPotholes", potholeDAO.cityWithMostPotholesAndNumOfPotholes());
+		model.put("zipCityWithMostPotholes", potholeDAO.zipWithMostPotholes());
 		
 		return "metrics";
 	}
