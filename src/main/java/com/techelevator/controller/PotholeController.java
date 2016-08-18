@@ -125,6 +125,10 @@ public class PotholeController {
 		model.put("streetWithMostPotholes", potholeDAO.streetWithMostPotholes());
 		model.put("cityMostPotholes", potholeDAO.cityWithMostPotholesAndNumOfPotholes());
 		model.put("zipCityWithMostPotholes", potholeDAO.zipWithMostPotholes());
+		model.put("highPriorityPotholes", potholeDAO.numberOfHighPriorityPotholes());
+		model.put("cityMostHighPriorityPotholes", potholeDAO.cityWithMostHighPriorityPotholes());
+		model.put("potholesFixedInLastMonth", potholeDAO.numberOfPotholesFixedInLastMonth());
+		model.put("potholesReportedInLastMonth", potholeDAO.numberOfPotholesReportedInLastMonth());
 		
 		return "overview";
 	}

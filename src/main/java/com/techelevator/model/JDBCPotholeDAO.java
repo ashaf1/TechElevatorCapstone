@@ -229,4 +229,64 @@ public class JDBCPotholeDAO implements PotholeDAO {
 		}
 		return zipAndCityWithMostPotholes;
 	}
+
+	@Override
+	public int numberOfHighPriorityPotholes() {
+		int highPriorityPotholes = 0;
+		String sqlGetNumberOfHighPriorityPotholes = "Select count(*) as num_potholes "
+												  + "From pothole "
+												  + "Where status <> 'Repaired' AND status <> 'Duplicate' And priority_level = 'High'";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetNumberOfHighPriorityPotholes);
+		if(results.next()){
+			highPriorityPotholes = results.getInt("num_potholes");
+		}
+		return highPriorityPotholes;
+	}
+
+	@Override
+	public String cityWithMostHighPriorityPotholes() {
+		String cityAndNumberMostHighPriorityPotholes = "";
+		String sqlGetCityAndNumOfHighPriorityPotholes = "Select location.city, count(*) as num_potholes "
+													  + "From pothole "
+													  + "Join location on pothole.location_id = location.location_id where status <> 'Repaired' "
+													  + "AND status <> 'Duplicate' "
+													  + "AND priority_level = 'High' "
+													  + "Group By city Order By num_potholes desc limit 1";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCityAndNumOfHighPriorityPotholes);
+		
+		if(results.next()){
+			cityAndNumberMostHighPriorityPotholes = Integer.toString(results.getInt("num_potholes")) + " high priority pothole(s) in " + results.getString("city");
+		}
+		return cityAndNumberMostHighPriorityPotholes;
+	}
+
+	@Override
+	public int numberOfPotholesFixedInLastMonth() {
+		int potholesFixedLastMonth = 0;
+		String sqlGetPotholesFixedInLastMonth = "Select count(*) as num_potholes "
+											  + "From pothole "
+											  + "Where status = 'Repaired' AND status <> 'Duplicate' "
+											  + "AND fixed_date >  CURRENT_DATE - INTERVAL '1 month' "
+											  + "AND CURRENT_DATE > fixed_date";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetPotholesFixedInLastMonth);
+		if(results.next()){
+			potholesFixedLastMonth = results.getInt("num_potholes");
+		}
+		return potholesFixedLastMonth;
+	}
+
+	@Override
+	public int numberOfPotholesReportedInLastMonth() {
+		int potholesReportedLastMonth = 0;
+		String sqlGetPotholesReportedInLastMonth = "Select count(*) as num_potholes "
+											  + "From pothole "
+											  + "Where status <> 'Duplicate' "
+											  + "AND create_date >  CURRENT_DATE - INTERVAL '1 month' "
+											  + "AND CURRENT_DATE > create_date";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetPotholesReportedInLastMonth);
+		if(results.next()){
+			potholesReportedLastMonth = results.getInt("num_potholes");
+		}
+		return potholesReportedLastMonth;
+	}
 }
