@@ -256,6 +256,8 @@ public class JDBCPotholeDAO implements PotholeDAO {
 		
 		if(results.next()){
 			cityAndNumberMostHighPriorityPotholes = Integer.toString(results.getInt("num_potholes")) + " high priority pothole(s) in " + results.getString("city");
+		} else {
+			cityAndNumberMostHighPriorityPotholes = "There are currently no high priority potholes";
 		}
 		return cityAndNumberMostHighPriorityPotholes;
 	}
