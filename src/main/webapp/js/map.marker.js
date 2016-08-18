@@ -40,7 +40,11 @@ $(document).ready(function (e) {
 						map: map,
 						position: results[0].geometry.location
 					});
-				} else {
+				} else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
+		            setTimeout(function() {
+		                Geocode(address);
+		            }, 200);
+		        } else {
 					alert('Geocode was not successful for the following reason: '+status);
 				}	
 			});
