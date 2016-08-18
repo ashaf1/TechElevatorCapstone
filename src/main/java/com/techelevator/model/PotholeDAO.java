@@ -19,4 +19,8 @@ public interface PotholeDAO {
 	public String cityWithMostPotholesAndNumOfPotholes();
 	public String streetWithMostPotholes();
 	public String zipWithMostPotholes();
+	public int numberOfHighPriorityPotholes();
+	public String cityWithMostHighPriorityPotholes();
+	public int numberOfPotholesFixedInLastMonth();
+	public int numberOfPotholesReportedInLastMonth();
 }

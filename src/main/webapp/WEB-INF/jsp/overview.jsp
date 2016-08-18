@@ -8,7 +8,12 @@
 	<p><b>Street with most unfixed potholes:</b> ${streetWithMostPotholes}</p>
 	<p><b>City with most unfixed potholes:</b> ${cityMostPotholes}</p>
 	<p><b>Zip/City area with most unfixed potholes:</b> ${zipCityWithMostPotholes}</p>
-	<p><b></b>
+	<p><b>Number of "High" priority potholes:</b> ${highPriorityPotholes}</p>
+	<p><b>City with most "High" priority potholes:</b> ${cityMostHighPriorityPotholes}</p>
+	<p><b>Potholes fixed in last month:</b> ${potholesFixedInLastMonth}</p>
+	<p><b>Potholes reported in last month:</b> ${potholesReportedInLastMonth}</p>
+	
+	
 </div>
 
 
