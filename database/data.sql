@@ -17,18 +17,24 @@ INSERT INTO location(address_number, street, city, zip, comments)
 VALUES('7100', 'Euclid Ave', 'Cleveland', '44103', 'Located right outside in front of the building.');
 
 INSERT INTO location(address_number, street, city, zip, comments)
-VALUES('123', 'Smith Rd', 'Brunswick', '44212', 'N/A');
+VALUES('2401', 'Ontario St', 'Cleveland', '44115', 'N/A');
 
 INSERT INTO location(street, city, zip, comments)
 VALUES('Darrow Rd', 'Stow', '44224', 'Located between the red house and the green building.');
 
-INSERT INTO pothole(location_id)
-VALUES (1);
+INSERT INTO location(address_number, street, city, zip, comments)
+VALUES('230', 'W Huron Rd', 'Cleveland', '44113', 'Outside the cafe');
 
-INSERT INTO pothole(location_id)
-VALUES (2);
+INSERT INTO pothole(location_id, status, priority_level, create_date, inspection_date, fixed_date)
+VALUES (1, 'Repaired', 'High', '2016-08-01', '2016-08-10', '2016-08-13');
+
+INSERT INTO pothole(location_id, status, priority_level, create_date, inspection_date, fixed_date)
+VALUES (2, 'Repair Scheduled', 'Medium', '2016-08-02', '2016-08-12', '2016-08-15');
 
 INSERT INTO pothole(location_id)
 VALUES (3);
+
+INSERT INTO pothole(location_id)
+VALUES (4);
 
 COMMIT;

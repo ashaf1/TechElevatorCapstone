@@ -39,8 +39,8 @@
 				<ul class="nav navbar-nav">
 					<c:url var="homePageHref" value="/" />
 					<li><a href="${homePageHref}">Home</a></li>
-					<c:url var="viewMetricsHref" value="/overview"/>
-					<li><a href="${viewMetricsHref}">View Pothole Overview</a></li>
+					<c:url var="viewOverviewHref" value="/overview"/>
+					<li><a href="${viewOverviewHref}">View Pothole Overview</a></li>
 					<c:if test="${not empty currentUser}">
 						<c:url var="dashboardHref" value="/users/${currentUser}" />
 						<li><a href="${dashboardHref}">My Account</a></li>

@@ -200,7 +200,7 @@ public class JDBCPotholeDAO implements PotholeDAO {
 										  + "Where status <> 'Repaired' AND status <> 'Duplicate' group by city order by num_potholes desc limit 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCityAndNumOfPotholes);
 		if(results.next()){
-		cityAndNumOfPotholes = Integer.toString(results.getInt("num_potholes")) + " potholes in " +results.getString("city");
+		cityAndNumOfPotholes = Integer.toString(results.getInt("num_potholes")) + " pothole(s) in " +results.getString("city");
 		}
 		return cityAndNumOfPotholes;
 	}
@@ -213,7 +213,7 @@ public class JDBCPotholeDAO implements PotholeDAO {
 											   + "Where status <> 'Repaired' AND status <> 'Duplicate' group by street,city order by count(street) desc limit 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetStreetWtihPotholesAndCity);
 		if(results.next()){
-		streetWithNumOfPotholesAndCity = Integer.toString(results.getInt("num_potholes")) + " potholes on "+results.getString("street")+" in "+results.getString("city");
+		streetWithNumOfPotholesAndCity = Integer.toString(results.getInt("num_potholes")) + " pothole(s) on "+results.getString("street")+" in "+results.getString("city");
 		}
 		return streetWithNumOfPotholesAndCity;
 	}
@@ -225,7 +225,7 @@ public class JDBCPotholeDAO implements PotholeDAO {
 												+ "Where status <> 'Repaired' AND status <> 'Duplicate' group by city, zip order by num_potholes desc limit 1";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetZipAndCityWithMostPotholes);
 		if(results.next()){
-			zipAndCityWithMostPotholes = Integer.toString(results.getInt("num_potholes")) + " potholes in " + results.getString("zip") + ", "+results.getString("city");
+			zipAndCityWithMostPotholes = Integer.toString(results.getInt("num_potholes")) + " pothole(s) in " + results.getString("zip") + ", "+results.getString("city");
 		}
 		return zipAndCityWithMostPotholes;
 	}

@@ -32,13 +32,8 @@ public class PotholeController {
 	}
 	
 	@RequestMapping(path="/users/{userName}/reports", method=RequestMethod.GET)
-	public String displayReportPage(ModelMap model, @RequestParam (required = false) String status, 
-			  										@RequestParam (required = false) String priorityLevel,
-			  										@RequestParam (required = false) String city,
-			  										@RequestParam (required = false) String streetAddress,
-			  										@RequestParam (required = false) String zip,
-			  										@PathVariable String userName) {
-		model.put("potholes", potholeDAO.getAllPotholes());		
+	public String displayReportPage(ModelMap model, @PathVariable String userName) {
+				
 		return "searchReports";
 	}
 	
@@ -124,7 +119,7 @@ public class PotholeController {
 	}
 	
 	@RequestMapping(path="/overview", method=RequestMethod.GET)
-	public String displayPotholeMetricsPage(ModelMap model){
+	public String displayPotholeOverviewPage(ModelMap model){
 		
 		model.put("avgRepairTime", potholeDAO.getAverageRepairTimeInDays());
 		model.put("streetWithMostPotholes", potholeDAO.streetWithMostPotholes());

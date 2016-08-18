@@ -41,23 +41,23 @@ public class LoginController {
 	@RequestMapping(path="/users", method=RequestMethod.POST)
 	public String createUser(@RequestParam String role, @RequestParam String firstName, 
 							 @RequestParam String lastName, @RequestParam String userName, 
-							 @RequestParam String password) {
-		
-		User newUser = new User();
-		newUser.setRole(role);
-		newUser.setFirstName(firstName);
-		newUser.setLastName(lastName);
-		newUser.setUserName(userName);
-		newUser.setPassword(password);
-		
-		userDAO.createUser(newUser);
-		return "redirect:/login";
+							 @RequestParam String password, ModelMap model) {
+		User user = getUser(model);
+		if(user.getRole().equals("Administrator")){
+			User newUser = new User();
+			newUser.setRole(role);
+			newUser.setFirstName(firstName);
+			newUser.setLastName(lastName);
+			newUser.setUserName(userName);
+			newUser.setPassword(password);
+			
+			userDAO.createUser(newUser);
+			return "redirect:/login";
+		}  else {
+			return "unauthorizedPage";
+		}
 	}
 	
-//	@RequestMapping(path={"/","/home"}, method=RequestMethod.GET)
-//	public String showHomePage(ModelMap model) {
-//		return "home";
-//	}
 	@RequestMapping(path="/login", method=RequestMethod.GET)
 	public String showLoginPage(){
 		return "login";

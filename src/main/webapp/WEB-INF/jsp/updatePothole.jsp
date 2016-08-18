@@ -8,12 +8,9 @@
 
 	<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 	<input type="hidden" name="potholeId" value="${param.potholeId}"/>
-	<%-- <c:if test="${currentPothole.status != 'NEW'}">
-		<c:url var="rescheduleInspectionHref" value="/users/${currentUser}/updatePothole?potholeId=${param.potholeId}">
-			<c:param name="rescheduleInspection" value="true" />
-		</c:url>
-		<a href="${rescheduleInspectionHref}">Reschedule Inspection</a>
-	</c:if> --%>
+	<div id="potholeInfo">
+		<p><b>Pothole ID: </b> ${currentPothole.potholeId} <b>Address:</b><c:if test="${currentPothole.addressNumber != null}">${currentPothole.addressNumber}</c:if> ${currentPothole.street} ${currentPothole.city}, ${currentPothole.zip}</p>
+	</div>
 	<div class="row">
 		<div class="col-sm-6">
 			<c:choose>
