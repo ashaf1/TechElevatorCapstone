@@ -123,15 +123,14 @@ public class PotholeController {
 		return "redirect:/users/"+userName+"/reports";
 	}
 	
-	@RequestMapping(path="/users/{userName}/metrics", method=RequestMethod.GET)
-	public String displayPotholeMetricsPage(@PathVariable String userName,
-											ModelMap model){
+	@RequestMapping(path="/overview", method=RequestMethod.GET)
+	public String displayPotholeMetricsPage(ModelMap model){
 		
 		model.put("avgRepairTime", potholeDAO.getAverageRepairTimeInDays());
 		model.put("streetWithMostPotholes", potholeDAO.streetWithMostPotholes());
 		model.put("cityMostPotholes", potholeDAO.cityWithMostPotholesAndNumOfPotholes());
 		model.put("zipCityWithMostPotholes", potholeDAO.zipWithMostPotholes());
 		
-		return "metrics";
+		return "overview";
 	}
 }

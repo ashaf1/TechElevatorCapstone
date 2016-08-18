@@ -24,6 +24,6 @@ public class RestfulController {
 	@RequestMapping(path={"/home"}, method=RequestMethod.GET)
 	public List<Pothole> showHomePage(ModelMap model) {
 		
-		return potholeDAO.getAllPotholes();
+		return potholeDAO.getPotholesNotDuplicateOrRepaired();
 	}
 }
